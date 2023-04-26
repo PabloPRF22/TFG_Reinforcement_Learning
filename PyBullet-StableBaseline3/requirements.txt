@@ -1,0 +1,5 @@
+gym ==0.23.0
+pybullet
+imageio
+imageio-ffmpeg
+stable-baselines3[extra] 

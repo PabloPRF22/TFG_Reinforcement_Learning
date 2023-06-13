@@ -1,0 +1,7 @@
+- OS: Linux-5.15.49-linuxkit-pr-aarch64-with-glibc2.31 # 1 SMP PREEMPT Thu May 25 07:27:39 UTC 2023
+- Python: 3.9.17
+- Stable-Baselines3: 1.8.0
+- PyTorch: 2.0.1
+- GPU Enabled: False
+- Numpy: 1.23.5
+- Gym: 0.21.0

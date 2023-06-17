@@ -68,53 +68,7 @@ def plot_train_results(rewards, savepath, titulo, env):
     # Guardar la figura en el archivo especificado.
     plt.savefig(savepath)
 
-    # Mostrar la figura.
-    plt.show()
+  
 
 
-    
 
-def plot_train_results2(recompensas_medias, savepath, titulo,env):
-    # Crear una figura
-    fig  = plt.figure()
-    lenmax =0
-    for i in range (len(recompensas_medias)):
-        if lenmax<len(recompensas_medias[i]):
-            lenmax = len(recompensas_medias[i])
-    # Itera sobre cada conjunto de recompensas_medias
-    for i in range(len(recompensas_medias)):
-        # Gráfica de la recompensa media
-        plt.plot([j*5 for j in range(len(recompensas_medias[i]))], recompensas_medias[i], label=titulo[i])
-
-    # Añadir una leyenda
-    plt.legend(loc='upper right')
-    ax = fig.gca()
-    ax.set_xticks([50,100,150,200,250,300,350,400,450,500])
-    
-    # Título de la figura
-    plt.title(env)
-
-    # Etiquetas de los ejes
-    plt.xlabel('Episodio')
-    plt.ylabel('Valor')
-
-    # Mostrar la figura
-    plt.show()
-
-    # Guardar la figura
-    plt.savefig(savepath)
-
-
-if __name__ == '__main__':
-    data = [
-        ("Algorithm1", 50.5),
-        ("Algorithm2", 75.3),
-        ("Algorithm3", 60.2),
-        ("Algorithm4", 200.12),
-        ("Algorithm5", 0.0),
-        ("Algorithm6", -200),
-        ("Algorithm7", 10.3),
-        ("Algorithm8", 500),
-        ("Algorithm9", 348),
-    ]
-    #plot_mean_reward_per_algorithm(data, 'Taxi-v3', Path("results_plot.png"))

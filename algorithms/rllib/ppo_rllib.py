@@ -12,7 +12,7 @@ class PPOrllib:
         self.ppo = self.config.build()
 
     def learn(self) -> None:
-        for _ in tqdm(range(20), desc='Training PPO'):
+        for _ in tqdm(range(20), desc='Training PPO RLLIB'):
             self.ppo.train()
 
     def predict(self, state, deterministic: bool = True) -> List[int]:

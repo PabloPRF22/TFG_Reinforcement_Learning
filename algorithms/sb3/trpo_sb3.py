@@ -26,11 +26,20 @@ def get_rewards():
     return np.array(episodios, dtype=float)
 
 
-def train_sb3_trpo(env: gym.Env,eval_env: gym.Env,reward_threshold:int, **kwargs) -> BaseAlgorithm:
+def train_sb3_trpo(env: gym.Env,eval_env: gym.Env,reward_threshold:int,env_name:str,**kwargs) -> BaseAlgorithm:
+    monitor_env2 = VecMonitor(eval_env, "logsEval/", info_keywords=['episode'])
+
     callback_on_best = StopTrainingOnRewardThreshold(reward_threshold=reward_threshold, verbose=1)
     eval_callback = EvalCallback(eval_env, callback_on_new_best=callback_on_best, eval_freq=2500,n_eval_episodes=10, verbose=1)
     monitor_env = VecMonitor(env, "logs/", info_keywords=['episode'])
+    total = 10_000_000
+    if env_name != "HumanoidPyBulletEnv-v0":
+        total = 1_000_000
     sb3_trpo = TRPO('MlpPolicy', monitor_env, verbose=1, **kwargs)
-    sb3_trpo.learn(total_timesteps=1_000_000,callback=eval_callback)
+    sb3_trpo.learn(total_timesteps=total,callback=eval_callback,progress_bar=True)
     rewards = get_rewards()
     return sb3_trpo, rewards
+
+def get_trained_model_trpo(path):
+    loaded_model = TRPO.load(path)
+    return loaded_model

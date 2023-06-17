@@ -19,7 +19,6 @@ class SARSAAgent:
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
-        print("entor")
 
     def choose_action(self, state, deterministic: bool = False) -> int:
         if not deterministic and np.random.uniform(0, 1) < self.epsilon:

@@ -9,7 +9,7 @@ import numpy as np
 import shutil
 
 def get_rewards():
-    archivo_csv = './logs2/.monitor.csv'
+    archivo_csv = './logs/.monitor.csv'
     episodios = []
 
     with open(archivo_csv, 'r') as f:
@@ -32,6 +32,10 @@ def train_sb3_a2c(env: gym.Env,eval_env: gym.Env,reward_threshold:int,**kwargs) 
     monitor_env = VecMonitor(env, "logs/", info_keywords=['episode'])
     
     sb3_a2c = A2C('MlpPolicy',monitor_env, verbose=1, **kwargs)
-    sb3_a2c.learn(total_timesteps=500000,callback=eval_callback)
+    sb3_a2c.learn(total_timesteps=500000,callback=eval_callback,progress_bar=True)
     rewards = get_rewards()
     return sb3_a2c, rewards
+
+def get_trained_model_a2c(path):
+    loaded_model = A2C.load(path)
+    return loaded_model

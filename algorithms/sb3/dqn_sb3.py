@@ -37,11 +37,17 @@ def train_sb3_dqn(env: gym.Env, eval_env: gym.Env, reward_threshold:int, **kwarg
     eval_callback = EvalCallback(eval_env, callback_on_new_best=callback_on_best, eval_freq=1500, n_eval_episodes=10,verbose=1)
     monitor_env = VecMonitor(env, "logs/")
     sb3_dqn = DQN(env = monitor_env,policy='MlpPolicy', verbose=1, **kwargs)
-    sb3_dqn.learn(total_timesteps=250_000,callback=eval_callback)
+    sb3_dqn.learn(total_timesteps=250_000,callback=eval_callback,progress_bar=True)
     rewards = get_rewards()
     shutil.rmtree("logs/", ignore_errors=True)
 
 
     return sb3_dqn, rewards
+
+
+def get_trained_model_dqn(path):
+    loaded_model = DQN.load(path)
+    return loaded_model
+    
 
 

@@ -1,0 +1,9 @@
+stable-baselines3~=1.8.0
+sb3-contrib~=1.8.0
+ray[rllib]~=2.4.0
+tf-agents~=0.16.0
+tensorflow~=2.12.0
+torch~=2.0.0
+gym~=0.21.0
+numpy~=1.23.5
+tqdm~=4.65.0
